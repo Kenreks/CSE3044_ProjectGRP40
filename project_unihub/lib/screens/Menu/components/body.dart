@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:project_unihub/components/menu_button.dart';
+import 'package:project_unihub/screens/Login/components/body.dart';
 import 'package:project_unihub/screens/Menu/components/background.dart';
+import 'package:project_unihub/screens/Menu/menu_screen.dart';
 import 'package:project_unihub/screens/welcome_screen.dart';
 import 'package:toast/toast.dart';
 
@@ -49,7 +51,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
 
   Widget menu(context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 1),
+      padding: const EdgeInsets.only(left: 5),
       child: Align(
         alignment: Alignment.centerLeft,
         child: Column(
@@ -59,17 +61,21 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
           children: <Widget>[
             TextButton(
               onPressed: () {
-                print("dashhh");
+                bool isNewRouteSameAsCurrent = false;
+
+                Navigator.popUntil(context, (route) {
+                  if (route.settings.name == 'menu') {
+                    isNewRouteSameAsCurrent = true;
+                  }
+                  return true;
+                });
+
+                if (!isNewRouteSameAsCurrent) {
+                  Navigator.pushNamed(context, 'menu');
+                }
               },
-              child: Text("Dashboard",
-                  style: TextStyle(color: Colors.black, fontSize: 22)),
-            ),
-            TextButton(
-              onPressed: () {
-                print("profile");
-              },
-              child: Text("Profile",
-                  style: TextStyle(color: Colors.black, fontSize: 22)),
+              child: Text("Menu",
+                  style: TextStyle(color: Colors.black, fontSize: 25)),
             ),
             TextButton(
                 onPressed: () {
@@ -79,7 +85,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                   }));
                 },
                 child: Text("Logout",
-                    style: TextStyle(color: Colors.black, fontSize: 22))),
+                    style: TextStyle(color: Colors.black, fontSize: 25))),
           ],
         ),
       ),
@@ -120,28 +126,144 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                     },
                   ),
                   Text("MARUNHUB",
-                      style: TextStyle(fontWeight: FontWeight.bold)),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                   Icon(Icons.settings),
                 ],
               ),
               SizedBox(
-                height: 50,
+                height: 40,
               ),
               Container(
-                height: 200,
-                child: PageView(
-                  controller: PageController(viewportFraction: 0.8),
-                  scrollDirection: Axis.horizontal,
-                  pageSnapping: true,
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 8),
-                      color: Colors.black,
-                      width: 100,
-                    ),
-                  ],
+                alignment: Alignment.center,
+                child: Text(
+                  "Welcome " + registration.getUserName() + "!",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
-              )
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              SizedBox(
+                child: InkWell(
+                  child: Container(
+                      margin: const EdgeInsets.only(right: 20),
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 100, top: 1, bottom: 35),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(width: 10, color: Colors.orangeAccent),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.qr_code,
+                                  size: 70,
+                                ),
+                                onPressed: () {
+                                  Toast.show("Qr Reader");
+                                },
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Text(
+                                  "QR READER\nAttendace\nSystem",
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      )),
+                  onTap: () {},
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                child: InkWell(
+                  child: Container(
+                      margin: const EdgeInsets.only(right: 20),
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 80, top: 1, bottom: 35),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(width: 10, color: Colors.orangeAccent),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.gamepad,
+                                  size: 70,
+                                ),
+                                onPressed: () {
+                                  Toast.show("Quiz Game");
+                                },
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Text(
+                                  "QUIZ GAME\nQuestions from\nLectures",
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      )),
+                  onTap: () {},
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                child: InkWell(
+                  child: Container(
+                      margin: const EdgeInsets.only(right: 20),
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 90, top: 1, bottom: 20),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(width: 10, color: Colors.orangeAccent),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.chat,
+                                  size: 70,
+                                ),
+                                onPressed: () {
+                                  Toast.show("Chat");
+                                },
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Text(
+                                  "CHAT\nKeep in touch\nWith other\nStudents",
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      )),
+                  onTap: () {},
+                ),
+              ),
             ],
           ),
         ),

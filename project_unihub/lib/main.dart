@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_unihub/screens/Menu/menu_screen.dart';
 import 'package:project_unihub/screens/welcome_screen.dart';
 
 void main() {
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.blueAccent,
           scaffoldBackgroundColor: Colors.white),
       home: WelcomeScreen(),
+      routes: {
+        'menu': (BuildContext ctx) => MenuScreen(),
+      },
     );
   }
 }
