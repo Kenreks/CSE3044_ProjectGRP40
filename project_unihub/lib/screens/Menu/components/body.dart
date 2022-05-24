@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:project_unihub/components/menu_button.dart';
+import 'package:project_unihub/screens/Login/components/body.dart';
 import 'package:project_unihub/screens/Menu/components/background.dart';
 import 'package:project_unihub/screens/Menu/menu_screen.dart';
 import 'package:project_unihub/screens/welcome_screen.dart';
@@ -50,7 +51,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
 
   Widget menu(context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 1),
+      padding: const EdgeInsets.only(left: 5),
       child: Align(
         alignment: Alignment.centerLeft,
         child: Column(
@@ -60,19 +61,21 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
           children: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return MenuScreen();
-                }));
+                bool isNewRouteSameAsCurrent = false;
+
+                Navigator.popUntil(context, (route) {
+                  if (route.settings.name == 'menu') {
+                    isNewRouteSameAsCurrent = true;
+                  }
+                  return true;
+                });
+
+                if (!isNewRouteSameAsCurrent) {
+                  Navigator.pushNamed(context, 'menu');
+                }
               },
               child: Text("Menu",
-                  style: TextStyle(color: Colors.black, fontSize: 22)),
-            ),
-            TextButton(
-              onPressed: () {
-                print("profile");
-              },
-              child: Text("Profile",
-                  style: TextStyle(color: Colors.black, fontSize: 22)),
+                  style: TextStyle(color: Colors.black, fontSize: 25)),
             ),
             TextButton(
                 onPressed: () {
@@ -82,7 +85,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                   }));
                 },
                 child: Text("Logout",
-                    style: TextStyle(color: Colors.black, fontSize: 22))),
+                    style: TextStyle(color: Colors.black, fontSize: 25))),
           ],
         ),
       ),
@@ -134,7 +137,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
               Container(
                 alignment: Alignment.center,
                 child: Text(
-                  "Welcome!",
+                  "Welcome " + registration.getUserName() + "!",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
@@ -146,7 +149,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                   child: Container(
                       margin: const EdgeInsets.only(right: 20),
                       padding: const EdgeInsets.only(
-                          left: 20, right: 100, top: 1, bottom: 30),
+                          left: 20, right: 100, top: 1, bottom: 35),
                       decoration: BoxDecoration(
                           border:
                               Border.all(width: 10, color: Colors.orangeAccent),
@@ -187,7 +190,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                   child: Container(
                       margin: const EdgeInsets.only(right: 20),
                       padding: const EdgeInsets.only(
-                          left: 20, right: 100, top: 5, bottom: 40),
+                          left: 20, right: 80, top: 1, bottom: 35),
                       decoration: BoxDecoration(
                           border:
                               Border.all(width: 10, color: Colors.orangeAccent),
@@ -206,8 +209,12 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                                   Toast.show("Quiz Game");
                                 },
                               ),
-                              Text(
-                                "QUIZ GAME\n",
+                              Container(
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Text(
+                                  "QUIZ GAME\nQuestions from\nLectures",
+                                ),
                               )
                             ],
                           )
@@ -224,7 +231,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                   child: Container(
                       margin: const EdgeInsets.only(right: 20),
                       padding: const EdgeInsets.only(
-                          left: 20, right: 100, top: 5, bottom: 40),
+                          left: 20, right: 90, top: 1, bottom: 20),
                       decoration: BoxDecoration(
                           border:
                               Border.all(width: 10, color: Colors.orangeAccent),
@@ -243,8 +250,12 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                                   Toast.show("Chat");
                                 },
                               ),
-                              Text(
-                                "CHAT",
+                              Container(
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Text(
+                                  "CHAT\nKeep in touch\nWith other\nStudents",
+                                ),
                               )
                             ],
                           )

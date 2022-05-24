@@ -48,10 +48,11 @@ class Body extends StatelessWidget {
                 } else {
                   if (await registration.Login(email, password)) {
                     Toast.show("Login successful!");
-                    Navigator.push(context,
+                    /*Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return MenuScreen();
-                    }));
+                    }));*/
+                    Navigator.pushNamed(context, 'menu');
                   } else {
                     Toast.show("Wrong email or password");
                   }

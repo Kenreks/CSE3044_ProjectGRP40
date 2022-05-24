@@ -7,10 +7,12 @@ import 'package:project_unihub/screens/Login/components/body.dart';
 class Registration {
   var dbHelper = DbHelper();
   EmailAuth emailAuth = new EmailAuth(sessionName: "Unihub");
+  late UserModel userModel;
 
   Future<bool> Login(String email, String password) async =>
       await dbHelper.getLoginUser(email, password).then((UserData) {
         if (UserData != null) {
+          userModel = UserData;
           return true;
         } else {
           return false;
@@ -25,6 +27,7 @@ class Registration {
       UserModel userModel =
           UserModel((idIncrement + 1).toString(), fullname, email, password);
       dbHelper.saveData(userModel).then((userData) {
+        userModel = userData;
         return true;
       }).catchError((error) {
         print(error);
@@ -53,5 +56,9 @@ class Registration {
     } else {
       return false;
     }
+  }
+
+  String getUserName() {
+    return userModel.fullname;
   }
 }
