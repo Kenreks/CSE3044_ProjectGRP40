@@ -19,29 +19,7 @@ class QuestionController extends GetxController
   PageController get pageController => this._pageController;
 
   late String lecture;
-  /* late List<Questions> _questions = Questions.lectures['Algorithm Analysis']!
-      .map(
-        (question) => Questions(
-            id: question['id'],
-            question: question['question'],
-            options: question['options'],
-            answer: question['answer_index']),
-      )
-      .toList(); */
-
   static List<Questions>? _questions;
-
-  /* void setQuestions(String lecture) {
-    /* _questions = Questions.lectures[lecture]!
-        .map(
-          (question) => Questions(
-              id: question['id'],
-              question: question['question'],
-              options: question['options'],
-              answer: question['answer_index']),
-        )
-        .toList(); */
-  } */
 
   set set(String lecture) {
     _questions = Questions.lectures[lecture]!
@@ -74,13 +52,17 @@ class QuestionController extends GetxController
   int _numOfCorrectAns = 0;
   int get numOfCorrectAns => this._numOfCorrectAns;
 
+  set numOfCorrectAns(int ansnum) {
+    _numOfCorrectAns = ansnum;
+  }
+
   // called immediately after the widget is allocated memory
   @override
   void onInit() {
     // Our animation duration is 60 s
     // so our plan is to fill the progress bar within 60s
     _animationController =
-        AnimationController(duration: Duration(seconds: 60), vsync: this);
+        AnimationController(duration: Duration(seconds: 30), vsync: this);
     _animation = Tween<double>(begin: 0, end: 1).animate(_animationController)
       ..addListener(() {
         // update like setState
@@ -104,6 +86,7 @@ class QuestionController extends GetxController
 
   void checkAns(Questions question, int selectedIndex) {
     // because once user press any option then it will run
+
     _isAnswered = true;
     _correctAns = question.answer;
     _selectedAns = selectedIndex;
@@ -115,7 +98,7 @@ class QuestionController extends GetxController
     update();
 
     // Once user select an ans after 3s it will go to the next qn
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(milliseconds: 500), () {
       nextQuestion();
     });
   }
@@ -135,6 +118,7 @@ class QuestionController extends GetxController
     } else {
       // Get package provide us simple way to naviigate another page
       Get.to(ScoreScreen());
+      numOfCorrectAns = 0;
     }
   }
 

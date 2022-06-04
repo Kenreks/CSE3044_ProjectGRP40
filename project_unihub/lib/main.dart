@@ -3,8 +3,14 @@ import 'package:get/get.dart';
 import 'package:project_unihub/screens/Menu/menu_screen.dart';
 import 'package:project_unihub/screens/Quiz%20Game/quiz_welcome_screen.dart';
 import 'package:project_unihub/screens/welcome_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 

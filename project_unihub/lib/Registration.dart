@@ -39,8 +39,6 @@ class Registration {
   }
 
   bool passwordValidate(String value) {
-    //String pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-
     String pattern = r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}|(?=.*\W)$';
     RegExp regExp = new RegExp(pattern);
     return regExp.hasMatch(value);

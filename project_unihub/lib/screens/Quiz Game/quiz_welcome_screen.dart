@@ -8,7 +8,6 @@ import 'package:project_unihub/screens/Quiz%20Game/components/constants.dart';
 import 'package:project_unihub/screens/Quiz%20Game/questions_screen.dart';
 import 'package:toast/toast.dart';
 
-QuestionController questionController = QuestionController();
 final items = [
   'Software Engineering',
   'Algorithm Analysis',
@@ -21,6 +20,7 @@ class QuizWelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<QuizWelcomeScreen> {
+  QuestionController questionController = QuestionController();
   String? value;
   @override
   Widget build(BuildContext context) {
