@@ -68,38 +68,46 @@ class Body extends StatelessWidget {
               code = value;
             },
           ),
-          Button(
-              text: "SIGNUP",
-              press: () async {
-                if (fullname == '') {
-                  Toast.show("Please enter full name",
-                      duration: Toast.lengthLong);
-                } else if (!(email.contains('@marun.edu.tr'))) {
-                  Toast.show("Please enter a valid email adress",
-                      duration: Toast.lengthLong);
-                } else if (!(registration.passwordValidate(password))) {
-                  Toast.show(
-                      "Password must contain minimum eight characters, at least one letter and one number",
-                      duration: Toast.lengthLong);
-                } else {
-                  if (await registration.verifyCode(email, code)) {
-                    if (await registration.Signup(fullname, email, password)) {
-                      Toast.show("Signup successfull",
-                          duration: Toast.lengthShort);
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return MenuScreen();
-                      }));
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+                color: Colors.deepOrange),
+            height: 60,
+            width: 200,
+            child: Button(
+                text: "SIGNUP",
+                press: () async {
+                  if (fullname == '') {
+                    Toast.show("Please enter full name",
+                        duration: Toast.lengthLong);
+                  } else if (!(email.contains('@marun.edu.tr'))) {
+                    Toast.show("Please enter a valid email adress",
+                        duration: Toast.lengthLong);
+                  } else if (!(registration.passwordValidate(password))) {
+                    Toast.show(
+                        "Password must contain minimum eight characters, at least one letter and one number",
+                        duration: Toast.lengthLong);
+                  } else {
+                    if (await registration.verifyCode(email, code)) {
+                      if (await registration.Signup(
+                          fullname, email, password)) {
+                        Toast.show("Signup successfull",
+                            duration: Toast.lengthShort);
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return MenuScreen();
+                        }));
+                      } else {
+                        Toast.show("User already exists",
+                            duration: Toast.lengthShort);
+                      }
                     } else {
-                      Toast.show("User already exists",
+                      Toast.show("Couldn't verify the code",
                           duration: Toast.lengthShort);
                     }
-                  } else {
-                    Toast.show("Couldn't verify the code",
-                        duration: Toast.lengthShort);
                   }
-                }
-              }),
+                }),
+          ),
         ],
       ),
     );

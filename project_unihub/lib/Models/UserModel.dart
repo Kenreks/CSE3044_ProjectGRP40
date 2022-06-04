@@ -8,16 +8,6 @@ class UserModel {
 
   UserModel(this.userId, this.fullname, this.email, this.password);
 
-  /* Map<String, dynamic> toMap() {
-    var map = <String, dynamic>{
-      'userId': userId,
-      'fullname': fullname,
-      'email': email,
-      'password': password,
-    };
-    return map;
-  } */
-
   Map<String, dynamic> toMap() {
     return {
       DbHelper.c_userid: userId,

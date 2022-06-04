@@ -21,9 +21,9 @@ class Button extends StatelessWidget {
       width: size.width * 0.5,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(25),
-        child: FlatButton(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-          color: color,
+        child: TextButton(
+          /* padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          color: color, */
           onPressed: press,
           child: Text(text,
               style: TextStyle(color: textcolor, fontWeight: FontWeight.bold)),
