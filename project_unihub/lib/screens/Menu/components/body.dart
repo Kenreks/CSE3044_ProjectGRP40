@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:path/path.dart';
 import 'package:project_unihub/components/menu_button.dart';
+import 'package:project_unihub/screens/Attendance/qr_screen.dart';
 import 'package:project_unihub/screens/Login/components/body.dart';
 import 'package:project_unihub/screens/Menu/components/background.dart';
 import 'package:project_unihub/screens/Menu/menu_screen.dart';
+import 'package:project_unihub/screens/Quiz%20Game/quiz_screen.dart';
+import 'package:project_unihub/screens/Quiz%20Game/quiz_welcome_screen.dart';
 import 'package:project_unihub/screens/welcome_screen.dart';
 import 'package:toast/toast.dart';
 
@@ -33,7 +37,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    _controller..dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -179,7 +183,12 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                           )
                         ],
                       )),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return QrReader();
+                    }));
+                  },
                 ),
               ),
               SizedBox(
@@ -220,7 +229,9 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                           )
                         ],
                       )),
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => QuizWelcomeScreen());
+                  },
                 ),
               ),
               SizedBox(

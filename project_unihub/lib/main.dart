@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_unihub/screens/Menu/menu_screen.dart';
+import 'package:project_unihub/screens/Quiz%20Game/quiz_welcome_screen.dart';
 import 'package:project_unihub/screens/welcome_screen.dart';
 
 void main() {
@@ -11,7 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: _title,
       theme: ThemeData(
           fontFamily: 'Alata',
@@ -19,8 +21,12 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white),
       home: WelcomeScreen(),
       routes: {
-        'menu': (BuildContext ctx) => MenuScreen(),
+        'menu': (context) => MenuScreen(),
       },
+      getPages: [
+        GetPage(name: '/menu', page: () => MenuScreen()),
+        GetPage(name: '/quiz', page: () => QuizWelcomeScreen()),
+      ],
     );
   }
 }
