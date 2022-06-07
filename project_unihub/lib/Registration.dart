@@ -1,4 +1,5 @@
-import 'package:email_auth/email_auth.dart';
+/* import 'package:email_auth/email_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project_unihub/Models/UserModel.dart';
 import 'package:project_unihub/database/dbHelper.dart';
@@ -7,6 +8,7 @@ import 'package:project_unihub/screens/Login/components/body.dart';
 class Registration {
   var dbHelper = DbHelper();
   EmailAuth emailAuth = new EmailAuth(sessionName: "Unihub");
+  late final FirebaseAuth _firebaseAuth;
   late UserModel userModel;
 
   Future<bool> Login(String email, String password) async =>
@@ -59,4 +61,12 @@ class Registration {
   String getUserName() {
     return userModel.fullname;
   }
+
+  Future sendVerificationEmail(String email, String password) async {
+    try {
+      await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+    } catch (e) {}
+  }
 }
+ */

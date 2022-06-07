@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_unihub/screens/Chatv2/group_chat_screen.dart';
 import 'package:project_unihub/screens/Menu/menu_screen.dart';
 import 'package:project_unihub/screens/Quiz%20Game/quiz_welcome_screen.dart';
 import 'package:project_unihub/screens/welcome_screen.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: _title,
       theme: ThemeData(
           fontFamily: 'Alata',
-          primaryColor: Colors.blueAccent,
+          primaryColor: Colors.orangeAccent,
           scaffoldBackgroundColor: Colors.white),
       home: WelcomeScreen(),
       routes: {
@@ -32,6 +33,8 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/menu', page: () => MenuScreen()),
         GetPage(name: '/quiz', page: () => QuizWelcomeScreen()),
+        GetPage(name: '/chat', page: () => GroupChatHomeScreen()),
+        /* GetPage(name: 'qr', page: page); */
       ],
     );
   }

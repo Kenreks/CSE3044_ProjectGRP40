@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart';
+import 'package:project_unihub/auth.dart';
 import 'package:project_unihub/components/menu_button.dart';
 import 'package:project_unihub/screens/Attendance/qr_screen.dart';
+import 'package:project_unihub/screens/Chat/chat_system.dart';
+import 'package:project_unihub/screens/Chat/screens/body.dart';
+import 'package:project_unihub/screens/Chatv2/group_chat_screen.dart';
 import 'package:project_unihub/screens/Login/components/body.dart';
 import 'package:project_unihub/screens/Menu/components/background.dart';
 import 'package:project_unihub/screens/Menu/menu_screen.dart';
@@ -84,6 +88,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
             TextButton(
                 onPressed: () {
                   Toast.show("Logged out");
+                  Auth().logout();
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return WelcomeScreen();
                   }));
@@ -140,10 +145,12 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
               ),
               Container(
                 alignment: Alignment.center,
-                child: Text(
-                  "Welcome " + registration.getUserName() + "!",
+                /* child: Text(
+                  /* "Welcome " + registration.getUserName() + "!",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20), */
+                  "Welcome " +  Auth().getFullname(Auth().getUid())+ "!",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
+                ), */
               ),
               SizedBox(
                 height: 40,
@@ -272,7 +279,12 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                           )
                         ],
                       )),
-                  onTap: () {},
+                  onTap: () {
+                    /* Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ChatSystem())); */
+                    /* Get.to(ChatWelcomeScreen()); */
+                    Get.to(GroupChatHomeScreen());
+                  },
                 ),
               ),
             ],

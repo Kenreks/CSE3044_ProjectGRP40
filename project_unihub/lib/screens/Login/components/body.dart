@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:project_unihub/auth.dart';
 import 'package:project_unihub/components/button.dart';
 import 'package:project_unihub/components/input_field.dart';
 import 'package:project_unihub/components/password_field.dart';
@@ -10,7 +12,7 @@ import 'package:project_unihub/Registration.dart';
 
 late String email;
 late String password;
-Registration registration = Registration();
+Auth _authService = Auth();
 
 class Body extends StatelessWidget {
   const Body({
@@ -47,17 +49,27 @@ class Body extends StatelessWidget {
                   if (!(email.contains('@'))) {
                     Toast.show("Please enter a valid email adress",
                         duration: Toast.lengthLong);
-                  } else if (!(registration.passwordValidate(password))) {
+                  } else if (!(Auth().passwordValidate(password))) {
                     Toast.show(
                         "Password must contain minimum: one uppercase, lowercase, numeric number and special character",
                         duration: Toast.lengthLong);
                   } else {
-                    if (await registration.Login(email, password)) {
+                    try {
+                      Auth().signIn(email, password);
+                      Toast.show("Login successful!");
+                      Navigator.pushNamed(context, 'menu');
+                    } on FirebaseAuthException catch (e) {
+                      if (!(Auth().checkPassword(password))) {
+                        Toast.show("Incorrect password");
+                      }
+                    }
+
+                    /* if (await registration.Login(email, password)) {
                       Toast.show("Login successful!");
                       Navigator.pushNamed(context, 'menu');
                     } else {
                       Toast.show("Wrong email or password");
-                    }
+                    } */
                   }
                 }),
           ),
